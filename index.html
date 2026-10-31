@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>水墨疾影 - 国风动作跑酷</title>
+  <link rel="stylesheet" href="./src/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app-container">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- 顶部 HUD -->
+    <header id="hud-overlay">
+      <div class="hud-left">
+        <div class="health-container">
+          <span class="label">气血</span>
+          <div class="health-bar-bg">
+            <div id="health-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="distance-display"><span id="distance-val">0</span> <small>米</small></div>
+        <div id="combo-display" class="hidden">0连斩!</div>
+      </div>
+
+      <div class="hud-right">
+        <div class="score-item">
+          <span class="score-label">修为</span>
+          <span id="score-val">0</span>
+        </div>
+        <div class="score-item jade-item">
+          <span class="jade-icon">◆</span>
+          <span id="jade-val">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 技能与控制提示（桌面端） -->
+    <div id="desktop-controls-hint">
+      <span>[空格/W/↑] 跳跃 / 二段翻滚</span>
+      <span>[S/↓] 贴地滑铲</span>
+      <span>[J/X] 墨影拔刀斩</span>
+      <span>[K/L/Shift] 瞬影突进</span>
+    </div>
+
+    <!-- 移动端虚拟按键 -->
+    <div id="mobile-controls">
+      <div class="mobile-group-left">
+        <button id="btn-slide" class="m-btn">铲</button>
+      </div>
+      <div class="mobile-group-right">
+        <button id="btn-slash" class="m-btn btn-action">斩</button>
+        <button id="btn-dash" class="m-btn btn-dash">闪</button>
+        <button id="btn-jump" class="m-btn btn-jump">跃</button>
+      </div>
+    </div>
+
+    <!-- 初始引导遮罩 -->
+    <div id="start-overlay" class="modal-overlay">
+      <div class="modal-card">
+        <h1 class="game-title">水墨疾影</h1>
+        <p class="subtitle">孤舟蓑笠踏月行，剑气纵横斩飞矢</p>
+        <div class="rules-summary">
+          <div class="rule-col">
+            <div class="icon">🗡️</div>
+            <div><strong>拔刀斩</strong>：劈碎飞矢、断绝阻障</div>
+          </div>
+          <div class="rule-col">
+            <div class="icon">⚡</div>
+            <div><strong>瞬影突进</strong>：无敌疾行穿破机关陷阱</div>
+          </div>
+          <div class="rule-col">
+            <div class="icon">🥋</div>
+            <div><strong>凌空翻腾</strong>：二段跳、滑铲穿过低矮齿轮</div>
+          </div>
+        </div>
+        <button id="btn-start" class="primary-btn">踏 入 江 湖</button>
+      </div>
+    </div>
+
+    <!-- 游戏结束结算 -->
+    <div id="gameover-overlay" class="modal-overlay hidden">
+      <div class="modal-card">
+        <h2 class="gameover-title">力竭陨落</h2>
+        <div class="stats-grid">
+          <div class="stat-row">
+            <span>行进距离：</span>
+            <span id="final-dist" class="stat-val">0</span> 米
+          </div>
+          <div class="stat-row">
+            <span>修得气运：</span>
+            <span id="final-score" class="stat-val">0</span>
+          </div>
+          <div class="stat-row">
+            <span>斩获灵玉：</span>
+            <span id="final-jade" class="stat-val">0</span> 枚
+          </div>
+          <div class="stat-row">
+            <span>最大连斩：</span>
+            <span id="final-combo" class="stat-val">0</span> 连
+          </div>
+        </div>
+        <button id="btn-restart" class="primary-btn">再 入 江 湖</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
